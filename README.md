@@ -1,131 +1,75 @@
 # 🚀 AutoCode AI
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3.11+-blue?style=for-the-badge&logo=python">
-  <img src="https://img.shields.io/badge/Flask-Web%20Framework-black?style=for-the-badge&logo=flask">
-  <img src="https://img.shields.io/badge/MySQL-Database-orange?style=for-the-badge&logo=mysql">
-  <img src="https://img.shields.io/badge/Google-Gemini%20AI-blue?style=for-the-badge&logo=google">
-  <img src="https://img.shields.io/badge-License-MIT-green?style=for-the-badge">
-</p>
-
-<p align="center">
-An AI-powered code generation platform that transforms natural language prompts into executable source code using Google Gemini AI.
+  <h3 align="center">AI-Powered Code Generation Platform</h3>
+  <p align="center">
+    Generate clean, efficient, and production-ready code from natural language prompts using Google Gemini AI.
+  </p>
 </p>
 
 ---
 
-# 📖 Overview
+## 📖 Overview
 
-**AutoCode AI** is a Flask-based web application that enables users to generate source code by simply describing their requirements in natural language. The platform leverages **Google Gemini AI** to produce clean, structured, and reusable code snippets across multiple programming languages.
+**AutoCode AI** is an AI-powered web application built with **Python** and **Flask** that transforms natural language prompts into executable source code. It leverages **Google Gemini AI** to help developers, students, and programming enthusiasts generate code quickly, reduce development time, and improve productivity.
 
-The application provides a simple and intuitive interface for developers, students, and programming enthusiasts to accelerate development, learn programming concepts, and automate repetitive coding tasks.
+The platform features a clean and responsive interface where users can describe the functionality they need in plain English. AutoCode AI processes these prompts and generates structured code across multiple programming languages, making software development more accessible and efficient.
 
 ---
 
-# ✨ Features
+## ✨ Features
 
 ### 🤖 AI Code Generation
-
-- Generate code from plain English prompts
-- Multi-language code generation
+- Generate code from natural language prompts
 - AI-powered coding assistance
+- Multi-language code generation
 - Fast and accurate responses
 - Beginner-friendly interface
 
----
-
 ### 🔐 User Authentication
+- Secure user registration
+- Login and session management
+- Protected user dashboard
 
-- User Registration
-- Secure Login
-- Session Management
-- Protected Dashboard
+### 💻 Interactive Dashboard
+- Generate code instantly
+- Manage prompt history
+- View previously generated code
+- Continue working on saved prompts
 
----
+### 🗄 Database Management
+- Secure MySQL database
+- User account management
+- Prompt and response history
+- Session tracking
 
-### 💬 Prompt-Based Development
-
-Users can describe requirements like:
-
-- Build a login page
-- Create a REST API
-- Write Python scripts
-- Generate HTML/CSS layouts
-- SQL Queries
-- Java Programs
-- JavaScript Functions
-
-and receive AI-generated source code instantly.
-
----
-
-### 📁 Dashboard
-
-Users can
-
-- Generate code
-- View previous prompts
-- Manage generated responses
-- Continue development seamlessly
+### 🎨 Responsive User Interface
+- Clean modern design
+- Mobile-friendly layout
+- Interactive navigation
+- Optimized user experience
 
 ---
 
-### 🗄 Database
-
-MySQL stores
-
-- User Accounts
-- Prompt History
-- Generated Code
-- Session Information
-
----
-
-# 🏗 Architecture
-
-```
-
-User
-
-↓
-
-Flask Application
-
-↓
-
-Google Gemini AI
-
-↓
-
-Generated Source Code
-
-↓
-
-MySQL Database
-
-```
-
----
-
-# 🛠 Tech Stack
+## 🛠 Tech Stack
 
 | Category | Technology |
-|----------|------------|
-| Backend | Flask |
-| Language | Python |
+|-----------|------------|
+| Programming Language | Python |
+| Backend Framework | Flask |
 | Frontend | HTML, CSS, JavaScript |
-| Templates | Jinja2 |
+| Template Engine | Jinja2 |
 | Database | MySQL |
-| AI Model | Google Gemini AI |
+| Artificial Intelligence | Google Gemini AI |
 | Authentication | Flask Login |
-| Environment | Python-dotenv |
+| Configuration | Python Dotenv |
 
 ---
 
-# 📂 Project Structure
+## 📂 Project Structure
 
 ```
-AutoCode-AI/
+autocode_ai/
 │
 ├── static/
 │   ├── css/
@@ -143,9 +87,9 @@ AutoCode-AI/
 
 ---
 
-# 🚀 Installation
+## 🚀 Installation
 
-## Clone Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/srijan0061/autocode_ai.git
@@ -153,60 +97,50 @@ git clone https://github.com/srijan0061/autocode_ai.git
 cd autocode_ai
 ```
 
----
+### 2. Create a Virtual Environment
 
-## Create Virtual Environment
-
-### Windows
+**Windows**
 
 ```bash
 python -m venv venv
-
 venv\Scripts\activate
 ```
 
-### Linux / macOS
+**Linux/macOS**
 
 ```bash
 python3 -m venv venv
-
 source venv/bin/activate
 ```
 
----
-
-## Install Dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
+### 4. Configure Environment Variables
 
-## Configure Environment Variables
-
-Create a `.env` file.
+Create a `.env` file in the project root.
 
 ```env
 SECRET_KEY=your_secret_key
 
 MYSQL_HOST=localhost
 MYSQL_USER=root
-MYSQL_PASSWORD=password
+MYSQL_PASSWORD=your_password
 MYSQL_DB=autocode_ai
 
 GEMINI_API_KEY=your_google_gemini_api_key
 ```
 
----
-
-## Run the Application
+### 5. Run the Application
 
 ```bash
 python app.py
 ```
 
-Open
+Visit:
 
 ```
 http://127.0.0.1:5000
@@ -214,65 +148,60 @@ http://127.0.0.1:5000
 
 ---
 
-# 💡 Key Functionalities
+## 💡 Core Functionalities
 
-- AI Code Generation
-- Prompt-Based Development
-- Google Gemini Integration
-- Secure Authentication
-- User Dashboard
-- Prompt History
-- MySQL Database
-- Responsive UI
+- AI-powered source code generation
+- Prompt-based programming assistance
+- Google Gemini AI integration
+- User authentication
+- Prompt history management
+- Responsive web interface
+- MySQL database integration
+- Secure session handling
 
 ---
 
-# 🤖 AI Workflow
+## 🤖 AI Workflow
 
 ```
 User Prompt
-
-↓
-
-Google Gemini API
-
-↓
-
-Prompt Processing
-
-↓
-
-Source Code Generation
-
-↓
-
-Display Generated Code
+      │
+      ▼
+AutoCode AI
+      │
+      ▼
+Google Gemini AI
+      │
+      ▼
+Generated Source Code
+      │
+      ▼
+Display Result to User
 ```
 
 ---
 
-# 📈 Future Enhancements
+## 📈 Future Enhancements
 
-- Code Explanation Feature
-- Code Optimization Suggestions
-- AI Debugging Assistant
-- Code Download (.py, .java, .cpp)
-- Dark Mode
-- Voice Prompt Support
-- Project Generation
-- GitHub Integration
-- Multiple AI Models
-- Code Sharing
+- AI code explanation
+- Code optimization suggestions
+- AI debugging assistant
+- Download generated code
+- Dark mode
+- Voice prompt support
+- GitHub integration
+- Multiple AI model support
+- Real-time collaboration
+- Project template generation
 
 ---
 
-# 🤝 Contributing
+## 🤝 Contributing
 
 Contributions are welcome!
 
 1. Fork the repository
-
-2. Create a new branch
+2. Create a feature branch
 
 ```bash
 git checkout -b feature-name
@@ -284,7 +213,7 @@ git checkout -b feature-name
 git commit -m "Add new feature"
 ```
 
-4. Push the branch
+4. Push to GitHub
 
 ```bash
 git push origin feature-name
@@ -294,13 +223,13 @@ git push origin feature-name
 
 ---
 
-# 📜 License
+## 📜 License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
 
 ---
 
-# 👨‍💻 Author
+## 👨‍💻 Author
 
 **Srijan Pandit**
 
@@ -308,26 +237,21 @@ This project is licensed under the MIT License.
 💻 Full Stack Developer  
 🤖 AI & Web Development Enthusiast
 
-### GitHub
-
-https://github.com/srijan0061
+**GitHub:** https://github.com/srijan0061
 
 ---
 
-# ⭐ Support
+## ⭐ Support
 
-If you found this project useful,
+If you found this project helpful:
 
-⭐ Star the repository
-
-🍴 Fork the project
-
-🐛 Report Issues
-
-💡 Suggest Features
+- ⭐ Star the repository
+- 🍴 Fork the project
+- 🐞 Report issues
+- 💡 Suggest improvements
 
 ---
 
 <p align="center">
-Made with ❤️ using Flask, Python, MySQL and Google Gemini AI.
+Made with ❤️ using Flask, Python, MySQL, and Google Gemini AI.
 </p>

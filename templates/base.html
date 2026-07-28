@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Autocode AI{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="{{ url_for('landing') }}" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M11 8 L4 16 L11 24" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 8 L28 16 L21 24" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 5 L14 27" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="brand-name">Autocode <span class="accent">AI</span></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="{{ url_for('landing') }}" class="nav-link {% if request.endpoint == 'landing' %}is-active{% endif %}">Home</a>
+      <a href="{{ url_for('about') }}" class="nav-link {% if request.endpoint == 'about' %}is-active{% endif %}">About</a>
+      <a href="{{ url_for('pricing') }}" class="nav-link {% if request.endpoint == 'pricing' %}is-active{% endif %}">Pricing</a>
+      <a href="{{ url_for('contact') }}" class="nav-link {% if request.endpoint == 'contact' %}is-active{% endif %}">Contact</a>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('editor') }}" class="nav-link {% if request.endpoint == 'editor' %}is-active{% endif %}">Editor</a>
+        <a href="{{ url_for('dashboard') }}" class="nav-link {% if request.endpoint == 'dashboard' %}is-active{% endif %}">Dashboard</a>
+        <a href="{{ url_for('logout') }}" class="btn-nav btn-ghost squeeze">Sign out</a>
+        <span class="nav-user">{{ current_user.name.split()[0] }}</span>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="btn-nav btn-ghost squeeze">Log in</a>
+        <a href="{{ url_for('register') }}" class="btn-nav btn-primary squeeze">Sign up</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-wrap">
+      {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="brand-name">Autocode <span class="accent">AI</span></span>
+      <p>Your AI pair-programmer in the browser. Write, fix, optimize, scan, and run code — powered by Gemini.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="{{ url_for('editor') }}">Code Editor</a>
+      <a href="{{ url_for('pricing') }}">Pricing</a>
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="{{ url_for('about') }}">About us</a>
+      <a href="{{ url_for('contact') }}">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Account</h4>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">Sign out</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Log in</a>
+        <a href="{{ url_for('register') }}">Sign up</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Autocode AI. Built with Flask · OpenCV · Gemini.</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('navToggle')?.addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('is-open');
+});
+</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

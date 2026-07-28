@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}Pricing — Autocode AI{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div class="section-inner">
+    <p class="eyebrow"><span class="pill">Pricing</span></p>
+    <h1>Simple plans.<br>Serious power.</h1>
+    <p class="hero-sub">Start free. Upgrade when you need more AI calls and priority features.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="pricing-grid">
+      <article class="price-card squeeze-card">
+        <h3>Free</h3>
+        <div class="price"><span class="currency">₹</span>0<span class="period">/mo</span></div>
+        <ul>
+          <li>Limited AI assists / day</li>
+          <li>Code editor + chat</li>
+          <li>Scan Code (OCR)</li>
+          <li>Python online runner</li>
+          <li>Usage dashboard</li>
+        </ul>
+        <a href="{{ url_for('register') }}" class="btn-ghost squeeze full">Get started</a>
+      </article>
+
+      <article class="price-card featured squeeze-card">
+        <span class="badge">Popular</span>
+        <h3>Pro</h3>
+        <div class="price"><span class="currency">₹</span>499<span class="period">/mo</span></div>
+        <ul>
+          <li>Higher AI limits</li>
+          <li>Priority Gemini responses</li>
+          <li>Unlimited scans</li>
+          <li>Faster code runner</li>
+          <li>Email support</li>
+        </ul>
+        {% if current_user.is_authenticated %}
+          <button class="btn-primary squeeze full" data-plan="pro" onclick="startCheckout('pro')">Subscribe with Razorpay</button>
+        {% else %}
+          <a href="{{ url_for('login') }}" class="btn-primary squeeze full">Log in to subscribe</a>
+        {% endif %}
+      </article>
+
+      <article class="price-card squeeze-card">
+        <h3>Team</h3>
+        <div class="price"><span class="currency">₹</span>1,499<span class="period">/mo</span></div>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>Shared workspace (coming)</li>
+          <li>Admin usage insights</li>
+          <li>Priority support</li>
+          <li>Custom limits</li>
+        </ul>
+        {% if current_user.is_authenticated %}
+          <button class="btn-ghost squeeze full" data-plan="team" onclick="startCheckout('team')">Subscribe with Razorpay</button>
+        {% else %}
+          <a href="{{ url_for('login') }}" class="btn-ghost squeeze full">Log in to subscribe</a>
+        {% endif %}
+      </article>
+    </div>
+    {% if not razorpay_ready %}
+      <p class="muted center mt-24">Razorpay keys are not set — checkout is in demo mode. Add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET to enable live payments.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+async function startCheckout(plan) {
+  try {
+    const res = await fetch('/api/create-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ plan }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.error || 'Could not create order');
+      return;
+    }
+    const options = {
+      key: data.key_id,
+      amount: data.amount,
+      currency: data.currency,
+      name: 'Autocode AI',
+      description: plan.toUpperCase() + ' plan',
+      order_id: data.order_id,
+      prefill: { name: data.name, email: data.email },
+      theme: { color: '#4dd8c4' },
+      handler: async function (response) {
+        const v = await fetch('/api/verify-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(response),
+        });
+        const result = await v.json();
+        if (v.ok) {
+          alert('Payment successful! Your plan is now: ' + result.plan);
+          window.location.href = '/dashboard';
+        } else {
+          alert(result.error || 'Verification failed');
+        }
+      },
+    };
+    const rzp = new Razorpay(options);
+    rzp.open();
+  } catch (e) {
+    alert('Checkout error: ' + e.message);
+  }
+}
+</script>
+{% endblock %}

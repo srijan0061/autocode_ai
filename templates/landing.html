@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Autocode AI — AI coding assistant{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <p class="eyebrow squeeze-parent"><span class="pill">Powered by Gemini</span></p>
+    <h1>Code smarter.<br><span class="accent">Ship faster.</span></h1>
+    <p class="hero-sub">
+      Autocode AI is your browser-native pair programmer — explain, fix, optimize,
+      complete, scan from photos, and run code online. Built for developers who
+      want flow, not friction.
+    </p>
+    <div class="hero-cta">
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('editor') }}" class="btn-primary btn-lg squeeze">Open editor</a>
+        <a href="{{ url_for('dashboard') }}" class="btn-ghost btn-lg squeeze">Dashboard</a>
+      {% else %}
+        <a href="{{ url_for('register') }}" class="btn-primary btn-lg squeeze">Start free</a>
+        <a href="{{ url_for('pricing') }}" class="btn-ghost btn-lg squeeze">View pricing</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="section features">
+  <div class="section-inner">
+    <h2 class="section-title">Everything you need to code with AI</h2>
+    <p class="section-sub">One workspace. Explain · Fix · Optimize · Complete · Scan · Run.</p>
+    <div class="card-grid">
+      <article class="feature-card squeeze-card">
+        <div class="feature-icon">💡</div>
+        <h3>Explain &amp; Fix</h3>
+        <p>One-click explanations and bug fixes. Gemini reads your editor and returns clear, skimmable answers with corrected code.</p>
+      </article>
+      <article class="feature-card squeeze-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Optimize &amp; Complete</h3>
+        <p>Improve performance and readability, or let Autocode finish incomplete functions in your existing style.</p>
+      </article>
+      <article class="feature-card squeeze-card">
+        <div class="feature-icon">📷</div>
+        <h3>Scan Code</h3>
+        <p>Drop a photo or screenshot. OpenCV denoises, thresholds, and deskews — Tesseract OCR turns it into editable text.</p>
+      </article>
+      <article class="feature-card squeeze-card">
+        <div class="feature-icon">▶</div>
+        <h3>Run online</h3>
+        <p>Execute Python right in the browser. See stdout and stderr instantly without leaving the editor.</p>
+      </article>
+      <article class="feature-card squeeze-card">
+        <div class="feature-icon">💬</div>
+        <h3>AI Chat</h3>
+        <p>Free-form pair programming. The assistant sees your current file as context and answers with fenced code blocks.</p>
+      </article>
+      <article class="feature-card squeeze-card">
+        <div class="feature-icon">📊</div>
+        <h3>Usage dashboard</h3>
+        <p>Track AI suggestions, code runs, and scans over time with clean charts on your personal dashboard.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section how">
+  <div class="section-inner">
+    <h2 class="section-title">How it works</h2>
+    <div class="steps">
+      <div class="step squeeze-card">
+        <span class="step-num">01</span>
+        <h3>Sign up</h3>
+        <p>Create an account with email or continue with Google in seconds.</p>
+      </div>
+      <div class="step squeeze-card">
+        <span class="step-num">02</span>
+        <h3>Open the editor</h3>
+        <p>Paste code, pick a language, and use Explain / Fix / Optimize / Complete.</p>
+      </div>
+      <div class="step squeeze-card">
+        <span class="step-num">03</span>
+        <h3>Scan or run</h3>
+        <p>Upload a photo of code, or hit Run to execute Python and see live output.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section cta-band">
+  <div class="section-inner cta-inner">
+    <h2>Ready to code with Autocode AI?</h2>
+    <p>Join developers who ship faster with Gemini at their side.</p>
+    <a href="{{ url_for('register') }}" class="btn-primary btn-lg squeeze">Create free account</a>
+  </div>
+</section>
+{% endblock %}

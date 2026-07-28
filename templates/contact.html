@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Contact — Autocode AI{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <div class="section-inner">
+    <p class="eyebrow"><span class="pill">Contact</span></p>
+    <h1>We’d love to hear<br>from you.</h1>
+    <p class="hero-sub">Questions, feedback, partnership ideas — drop us a line.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner contact-layout">
+    <form method="post" class="contact-form squeeze-card">
+      <label>
+        <span>Name</span>
+        <input type="text" name="name" required placeholder="Your name" class="input">
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" name="email" required placeholder="you@example.com" class="input">
+      </label>
+      <label>
+        <span>Message</span>
+        <textarea name="message" rows="5" required placeholder="How can we help?" class="input"></textarea>
+      </label>
+      <button type="submit" class="btn-primary squeeze">Send message</button>
+    </form>
+    <div class="contact-aside">
+      <div class="about-card squeeze-card">
+        <h3>Email</h3>
+        <p>hello@autocode.ai</p>
+      </div>
+      <div class="about-card squeeze-card">
+        <h3>Response time</h3>
+        <p>We typically reply within 1–2 business days.</p>
+      </div>
+      <div class="about-card squeeze-card">
+        <h3>Support</h3>
+        <p>For account or billing help, include the email you signed up with.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

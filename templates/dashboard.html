@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Autocode AI{% endblock %}
+{% block content %}
+<section class="page-hero compact">
+  <div class="section-inner">
+    <p class="eyebrow"><span class="pill">Dashboard</span></p>
+    <h1>Hey, {{ current_user.name.split()[0] }}</h1>
+    <p class="hero-sub">Plan: <strong class="accent">{{ current_user.plan|capitalize }}</strong> · Member since {{ current_user.created_at.strftime('%b %Y') }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="stat-grid">
+      <div class="stat-card squeeze-card">
+        <span class="stat-label">AI suggestions</span>
+        <span class="stat-value">{{ current_user.ai_calls or 0 }}</span>
+      </div>
+      <div class="stat-card squeeze-card">
+        <span class="stat-label">Code runs</span>
+        <span class="stat-value">{{ current_user.code_runs or 0 }}</span>
+      </div>
+      <div class="stat-card squeeze-card">
+        <span class="stat-label">OCR scans</span>
+        <span class="stat-value">{{ current_user.scans or 0 }}</span>
+      </div>
+      <div class="stat-card squeeze-card">
+        <span class="stat-label">Current plan</span>
+        <span class="stat-value accent">{{ current_user.plan|capitalize }}</span>
+      </div>
+    </div>
+
+    <div class="chart-card squeeze-card">
+      <h3>Activity — last 14 days</h3>
+      <canvas id="usageChart" height="100"></canvas>
+    </div>
+
+    <div class="dash-actions">
+      <a href="{{ url_for('editor') }}" class="btn-primary squeeze">Open code editor</a>
+      <a href="{{ url_for('pricing') }}" class="btn-ghost squeeze">Upgrade plan</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+const ctx = document.getElementById('usageChart');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: {{ days|tojson }},
+    datasets: [
+      { label: 'AI', data: {{ ai_series|tojson }}, borderColor: '#4dd8c4', backgroundColor: 'rgba(77,216,196,0.12)', tension: 0.35, fill: true },
+      { label: 'Runs', data: {{ run_series|tojson }}, borderColor: '#f2a65a', backgroundColor: 'rgba(242,166,90,0.08)', tension: 0.35, fill: true },
+      { label: 'Scans', data: {{ scan_series|tojson }}, borderColor: '#8493a3', backgroundColor: 'rgba(132,147,163,0.08)', tension: 0.35, fill: true },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { labels: { color: '#8493a3' } } },
+    scales: {
+      x: { ticks: { color: '#57687a' }, grid: { color: '#1a222c' } },
+      y: { beginAtZero: true, ticks: { color: '#57687a', stepSize: 1 }, grid: { color: '#1a222c' } }
+    }
+  }
+});
+</script>
+{% endblock %}
